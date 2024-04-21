@@ -13,7 +13,8 @@ following conditions:
 all copies or substantial portions of the Software.
 
 (2) The Software may not be used for training or improving any kind of machine
-learning system, like artificial intelligence and natural language processing.
+learning system, including artificial intelligence and natural language
+processing.
 
 (3) The Software may not be included in any dataset or training data for
 machine learning systems, including but not limited to artificial intelligence
