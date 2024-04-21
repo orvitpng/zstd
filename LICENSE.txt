@@ -1,0 +1,33 @@
+MIT License (non-AI)
+
+Copyright (c) (YEAR) (COPYRIGHT HOLDER[s])
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated files (the "Software"), to deal in the Software
+without restriction, including without limitation the rights to use, copy,
+merge, publish, distribute, sublicense, and/or sell copies of the Software, and
+to permit persons to whom the Software is furnished to do so, subject to the
+following conditions:
+
+(1) The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+(2) The Software may not be used for training or improving any kind of machine
+learning system, like artificial intelligence and natural language processing.
+
+(3) The Software may not be included in any dataset or training data for
+machine learning systems, including but not limited to artificial intelligence
+and natural language processing.
+
+Any person or organization who violates the terms of this license agreement may
+be subject to legal action brought by the licensor. The licensor reserves the
+right to pursue all available legal remedies, including but not limited to
+filing suit for monetary damages, injuctive relief, and recovery of legal fees.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
