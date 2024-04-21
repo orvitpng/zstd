@@ -1,6 +1,6 @@
 MIT License (non-AI)
 
-Copyright (c) (YEAR) (COPYRIGHT HOLDER[s])
+Copyright (c) 2024 Carter Davis
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated files (the "Software"), to deal in the Software
