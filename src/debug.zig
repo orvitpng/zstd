@@ -4,5 +4,5 @@ const std = @import("./mod.zig");
 // TODO: mutex the shit out of this
 pub fn print(comptime fmt: []const u8, args: anytype) void {
     _ = args;
-    std.io.stdout.write_all(fmt) catch {};
+    std.io.stdout.write(fmt) catch {};
 }
