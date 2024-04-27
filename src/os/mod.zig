@@ -7,6 +7,13 @@ const target = switch (@import("builtin").os.tag) {
 
 pub const types = target.types;
 
+pub const ReadError = error{Unknown};
+pub fn read(fd: types.fd_type, buf: []u8) ReadError!usize {
+    return switch (target.read(fd, buf.ptr, buf.len)) {
+        .ok => |val| val,
+        .err => error.Unknown,
+    };
+}
 pub const WriteError = error{Unknown};
 pub fn write(fd: types.fd_type, buf: []const u8) WriteError!usize {
     return switch (target.write(fd, buf.ptr, buf.len)) {
