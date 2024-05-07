@@ -1,4 +1,4 @@
-const std = @import("./mod.zig");
+const std = @import("./root.zig");
 
 pub const stdin = std.fs.File.new(std.os.get_stream_fd(.in)).reader;
 pub const stdout = std.fs.File.new(std.os.get_stream_fd(.out)).writer;

@@ -1,5 +1,5 @@
 const Self = @This();
-const std = @import("../mod.zig");
+const std = @import("../root.zig");
 
 fd: std.os.types.fd_type,
 reader: std.io.Reader(std.os.types.fd_type, std.os.ReadError, std.os.read),

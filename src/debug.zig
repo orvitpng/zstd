@@ -1,4 +1,4 @@
-const std = @import("./mod.zig");
+const std = @import("./root.zig");
 
 // TODO: actual format the text
 // TODO: mutex the shit out of this
