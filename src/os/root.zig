@@ -6,6 +6,7 @@ pub const target = switch (@import("builtin").os.tag) {
 pub const types = target.types;
 
 pub const ReadError = error{Unknown};
+/// Read from a file descriptor.
 pub fn read(fd: types.fd_type, buf: []u8) ReadError!usize {
     return switch (target.read(fd, buf.ptr, buf.len)) {
         .ok => |val| val,
@@ -13,6 +14,7 @@ pub fn read(fd: types.fd_type, buf: []u8) ReadError!usize {
     };
 }
 pub const WriteError = error{Unknown};
+/// Write to a file descriptor.
 pub fn write(fd: types.fd_type, buf: []const u8) WriteError!usize {
     return switch (target.write(fd, buf.ptr, buf.len)) {
         .ok => |val| val,
@@ -20,6 +22,7 @@ pub fn write(fd: types.fd_type, buf: []const u8) WriteError!usize {
     };
 }
 
+/// Get the file descriptor for a standard stream.
 pub fn get_stream_fd(stream: enum { in, out, err }) target.types.fd_type {
     return switch (stream) {
         .in => 0,

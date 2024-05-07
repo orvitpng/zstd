@@ -39,9 +39,14 @@ pub fn Writer(
 
         ctx: Context,
 
+        /// Write bytes to the writer.
         pub fn write(self: Self, buf: []const u8) Error!usize {
             return write_fn(self.ctx, buf);
         }
+        /// Write all bytes to the writer.
+        ///
+        /// This is different from `write` in that it will keep writing until
+        /// all bytes are written.
         pub fn write_all(self: Self, buf: []const u8) Error!void {
             var i: usize = 0;
             while (i != buf.len) {
