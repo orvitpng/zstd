@@ -1,11 +1,9 @@
 pub const errors = @import("./errors.zig");
-pub const types = @import("./types.zig");
-pub const x86_64 = @import("./x86_64/mod.zig");
-
-const target = switch (@import("builtin").cpu.arch) {
-    .x86_64 => x86_64,
+pub const target = switch (@import("builtin").cpu.arch) {
+    .x86_64 => @import("./x86_64/root.zig"),
     else => @compileError("unsupported arch"),
 };
+pub const types = @import("./types.zig");
 
 pub const syscalls = target.syscalls;
 

@@ -1,7 +1,5 @@
-pub const linux = @import("./linux/mod.zig");
-
-const target = switch (@import("builtin").os.tag) {
-    .linux => linux,
+pub const target = switch (@import("builtin").os.tag) {
+    .linux => @import("./linux/root.zig"),
     else => @compileError("unsupported os"),
 };
 
