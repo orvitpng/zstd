@@ -6,3 +6,6 @@ const std = @import("./root.zig");
 pub fn print(comptime fmt: []const u8, args: anytype) void {
     std.io.stderr.format(fmt, args) catch {};
 }
+pub fn println(comptime fmt: []const u8, args: anytype) void {
+    print(fmt ++ "\n", args);
+}

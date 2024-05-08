@@ -53,5 +53,76 @@ pub fn Writer(
                 i += try self.write(buf[i..]);
             }
         }
+
+        // TODO: make this more readable w/ better errors
+        // TODO: optimize this
+        /// Write a formatted string to the writer.
+        ///
+        /// Accepted format specifiers:
+        /// - Array
+        ///   - `s`: string
+        pub fn format(
+            self: Self,
+            comptime fmt: []const u8,
+            args: anytype,
+        ) Error!void {
+            const ArgsType = @TypeOf(args);
+            const args_info = @typeInfo(ArgsType);
+            if (args_info != .Struct)
+                @compileError("expected tuple or struct, found " ++ @typeName(ArgsType));
+            const fields = args_info.Struct.fields;
+
+            comptime var index = 0;
+            comptime var i = 0;
+            inline while (i < fmt.len) {
+                // no need to worry about wasting a syscall here, write_all
+                // compiles out if the buffer is empty
+                try self.write_all(fmt[blk: {
+                    comptime var start = i;
+                    inline while (i < fmt.len) : (i += 1) switch (fmt[i]) {
+                        '{' => break :blk start,
+                        '}' => @compileError("missing opening '{'"),
+                        '\\' => {
+                            if (i + 1 == fmt.len) @compileError("unexpected end of format string");
+                            if (start != i)
+                                try self.write_all(fmt[start..i]);
+                            i += 1;
+                            start = i;
+                        },
+                        else => {},
+                    };
+                    return try self.write_all(fmt[start..i]);
+                }..i]);
+                i += 1;
+
+                const start = i;
+                inline while (i != fmt.len and fmt[i] != '}') : (i += 1) {}
+                try self.format_type(
+                    @field(args, fields[index].name),
+                    fmt[start..i],
+                );
+
+                i += 1;
+                index += 1;
+            }
+        }
+        pub fn format_type(
+            self: Self,
+            value: anytype,
+            comptime specifier: []const u8,
+        ) Error!void {
+            return switch (@typeInfo(@TypeOf(value))) {
+                .Pointer => self.format_type(value.*, specifier),
+                .Array => {
+                    if (specifier.len == 0)
+                        @compileError("arrays must have a specifier");
+
+                    if (specifier[0] == 's')
+                        return self.write_all(&value);
+                    @compileError("unsupported array specifier: " ++ specifier[0]);
+                },
+                else => |tag| @compileError("unsupported argument type: " ++ @tagName(tag)),
+            };
+        }
     };
 }
