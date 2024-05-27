@@ -23,6 +23,21 @@ pub fn write(fd: types.fd_type, buf: [*]const u8, count: usize) ErrnoResult {
         count,
     ));
 }
+pub fn open(
+    filename: [*]const u8,
+    flags: c_int,
+    mode: types.mode_type,
+) ErrnoResult {
+    return get_errno(syscalls.three(
+        .open,
+        @intFromPtr(filename),
+        flags,
+        mode,
+    ));
+}
+pub fn close(fd: types.fd_type) ErrnoResult {
+    return get_errno(syscalls.one(.close, @bitCast(@as(isize, fd))));
+}
 
 pub const ErrnoResult = union(enum) { ok: usize, err: errors.Errors };
 pub fn get_errno(ret: usize) ErrnoResult {
