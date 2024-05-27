@@ -1,1 +1,1 @@
-pub const fd_type = c_int;
+pub const fd_type = u32;
