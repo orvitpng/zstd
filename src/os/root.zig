@@ -40,9 +40,9 @@ pub const CloseError = error{
     Interrupted,
     /// An I/O error occurred during the close operation.
     IOError,
-    /// There is no space left on the device (mostly for network file systems).
+    /// There is no space left on the device (mostly for buffered writes).
     NoSpace,
-    /// The disk quota was exceeded (mostly for network file systems).
+    /// The disk quota was exceeded (mostly for buffered writes).
     DiskQuotaExceeded,
     Unknown,
 };

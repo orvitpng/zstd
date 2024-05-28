@@ -1,8 +1,11 @@
 const std = @import("./root.zig");
 
-pub const stdin = std.fs.File.new(std.os.get_stream_fd(.in)).reader;
-pub const stdout = std.fs.File.new(std.os.get_stream_fd(.out)).writer;
-pub const stderr = std.fs.File.new(std.os.get_stream_fd(.err)).writer;
+pub const IOReader = Writer(std.os.types.fd_type, std.os.ReadError, std.os.read);
+pub const IOWriter = Writer(std.os.types.fd_type, std.os.WriteError, std.os.write);
+
+pub const stdin = IOReader{ .ctx = std.os.get_stream_fd(.in) };
+pub const stdout = IOWriter{ .ctx = std.os.get_stream_fd(.out) };
+pub const stderr = IOWriter{ .ctx = std.os.get_stream_fd(.err) };
 
 pub fn Reader(
     comptime Context: type,

@@ -5,9 +5,21 @@ fd: std.os.types.fd_type,
 reader: std.io.Reader(std.os.types.fd_type, std.os.ReadError, std.os.read),
 writer: std.io.Writer(std.os.types.fd_type, std.os.WriteError, std.os.write),
 
-/// Creates a new `File` from the given file descriptor.
-pub fn new(fd: std.os.types.fd_type) Self {
+fn new(fd: std.os.types.fd_type) Self {
     return .{ .fd = fd, .writer = .{ .ctx = fd }, .reader = .{ .ctx = fd } };
+}
+
+/// Creates a new `File` from the given path.
+pub fn open(path: []const u8) std.os.OpenError!Self {
+    return Self.new(try std.os.open(path));
+}
+/// Close the file.
+pub fn close(self: Self) void {
+    std.os.close(self.fd) catch |err| switch (err) {
+        // Race condition, shouldn't happen if purely using this API
+        .InvalidDescriptor => unreachable,
+        else => return,
+    };
 }
 
 /// Read the file.
